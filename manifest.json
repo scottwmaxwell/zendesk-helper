@@ -1,7 +1,7 @@
 {
-  "name": "Zendesk Refresher",
+  "name": "Zendesk Helper",
   "description": "Automatically refreshes the ZenDesk Ticket Counts for the different views",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "manifest_version": 3,
   "action": {
     "default_icon": "icon.png",
