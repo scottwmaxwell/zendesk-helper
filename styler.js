@@ -1,4 +1,3 @@
-let textCorrect = false;
 let mutationObserver;
 const fixText = (dark = true) => {
   for (const comment of document.querySelectorAll(".zd-comment")) {
@@ -25,17 +24,14 @@ const setupFixMutation = () => {
 };
 
 browser.storage.local.get("textcorrect", (result) => {
-  textCorrect = result["textcorrect"];
-  if (textCorrect) setupFixMutation();
+  if (result["textcorrect"]) setupFixMutation();
 });
 
 browser.storage.local.onChanged.addListener((result) => {
   if (!result["textcorrect"]) return;
   if (result["textcorrect"].newValue) {
-    textCorrect = true;
     setupFixMutation();
   } else if (!result["textcorrect"].newValue) {
-    textCorrect = false;
     if (mutationObserver) mutationObserver.disconnect();
     fixText(false);
   }
