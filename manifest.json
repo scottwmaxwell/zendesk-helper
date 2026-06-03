@@ -14,7 +14,7 @@
   "content_scripts": [   
     {
         "run_at": "document_start",
-        "js": ["contentscript.js"],
+        "js": ["refresher.js"],
         "matches": [
             "https://*.zendesk.com/agent/*"
         ]
