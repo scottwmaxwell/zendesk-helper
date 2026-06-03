@@ -18,6 +18,13 @@
         "matches": [
             "https://*.zendesk.com/agent/*"
         ]
+    },
+    {
+        "run_at": "document_start",
+        "js": ["styler.js"],
+        "matches": [
+            "https://*.zendesk.com/agent/tickets/*"
+        ]
     }
   ]
 }

@@ -1,33 +1,42 @@
-let fixText = false;
-
-const fixText = () => {
-    for (const comment of document.querySelectorAll(".zd-comment")) {
-        const allDescendants = comment.querySelectorAll("*");
-        for (const el of allDescendants) {
-            if (window.getComputedStyle(el).color === 'rgb(0, 0, 0)')
-                el.style.color = 'rgb(255, 255, 255)';
-        }
+let textCorrect = false;
+let mutationObserver;
+const fixText = (dark = true) => {
+  for (const comment of document.querySelectorAll(".zd-comment")) {
+    const allDescendants = comment.querySelectorAll("*");
+    for (const el of allDescendants) {
+      if (dark && window.getComputedStyle(el).color === "rgb(0, 0, 0)")
+        el.style.color = "rgb(255, 255, 255)";
+      else if (
+        !dark &&
+        window.getComputedStyle(el).color === "rgb(255, 255, 255)"
+      )
+        el.style.color = "rgb(0, 0, 0)";
     }
+  }
 };
 
 const setupFixMutation = () => {
-  fixText = true;
-  fixText();
   setTimeout(() => {
-    fixText(); // call again in case no further mutations occur
-    new MutationObserver((mutationList) => {
-        correctText();
-    }).observe(document, {subtree: true, childList: true});
-  }, 3000);
+    fixText();
+    mutationObserver = new MutationObserver((mutationList) => {
+      fixText();
+    }).observe(document, { subtree: true, childList: true });
+  }, 1000); // timeout to reduce flashing
 };
 
-chrome.storage.local.get("fixtext", (result) => {
-    fixText = result["fixtext]
-    if (fixText)
-        setupFixMutation();   
+browser.storage.local.get("textcorrect", (result) => {
+  textCorrect = result["textcorrect"];
+  if (textCorrect) setupFixMutation();
 });
 
-chrome.storage.local.onChange.addListener(()=>{
-    if (!fixText && result["fixtext])
-        setupFixMutation();   
+browser.storage.local.onChanged.addListener((result) => {
+  if (!result["textcorrect"]) return;
+  if (result["textcorrect"].newValue) {
+    textCorrect = true;
+    setupFixMutation();
+  } else if (!result["textcorrect"].newValue) {
+    textCorrect = false;
+    if (mutationObserver) mutationObserver.disconnect();
+    fixText(false);
+  }
 });

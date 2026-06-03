@@ -1,25 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Options</title>
-    <link href="https://fonts.googleapis.com/css?family=Varela Round" rel="stylesheet">
-    <link rel="stylesheet" href="popup.css">
-</head>
-<body>
-    <label for="interval">Refresh Every:</label>
-    <input id="interval" placeholder="10"> Seconds
-    <br>
+    <link
+      href="https://fonts.googleapis.com/css?family=Varela Round"
+      rel="stylesheet"
+    />
+    <style>
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: rgb(0, 0, 0);
+          color: white;
+        }
+      }
+      @media (prefers-color-scheme: light) {
+        body {
+          background-color: rgb(255, 255, 255);
+          color: rgb(0, 0, 0);
+        }
+      }
+      body {
+        width: 170px;
+        height: 150px;
+        font-family: "Varela Round";
+      }
 
-    <!-- Save Interval Button -->
-    <center>
-        <button id="save">Save</button>
-    </center>
-   
-    <p id="message" class="hidden">Interval Saved & Updated</p>
+      .hidden {
+        opacity: 0%;
+        transition: 2s;
+      }
 
-</body>
-<script src="popup.js"></script>
+      .show {
+        opacity: 100%;
+        transition: 2s;
+      }
+
+      #save {
+        background-color: rgb(20, 97, 95);
+        color: white;
+        width: 75px;
+        height: 30px;
+        border: none;
+        border-radius: 3px;
+        transition: background-color 0.3s ease;
+      }
+
+      #save:hover {
+        background-color: rgb(34, 132, 129);
+      }
+    </style>
+  </head>
+  <body style="display: grid; gap: 10px">
+    <div style="display: flex; align-items: center">
+      <label for="interval">Refresh (seconds): </label>
+      <input
+        style="width: 15px; margin-left: 5px"
+        id="interval"
+        placeholder="10"
+      />
+    </div>
+
+    <div style="display: flex; align-items: center">
+      <label for="textcorrect">Correct Text (Dark Mode): </label>
+      <input type="checkbox" id="textcorrect" />
+    </div>
+
+    <div style="justify-self: center">
+      <button id="save">Save</button>
+    </div>
+
+    <div>
+      <p style="justify-self: center" id="message" class="hidden">
+        Interval Saved & Updated
+      </p>
+    </div>
+  </body>
+  <script src="popup.js"></script>
 </html>
