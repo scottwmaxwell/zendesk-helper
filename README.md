@@ -1,4 +1,4 @@
-# ZenDesk Helper
+# Zendesk Helper
 
 This is a Browser Extension for refreshing filters on ZenDesk.
 It also provides options to correct text that is difficult to read with the native Dark Mode.
