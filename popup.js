@@ -1,19 +1,19 @@
-var saveButton = document.getElementById('save')
+let saveButton = document.getElementById('save')
 
-saveButton.addEventListener('click', async ()=>{
-    var newInterval = document.getElementById('interval').value;
+saveButton.addEventListener('click', async () => {
+    let newInterval = document.getElementById('interval').value;
     
     // Check if not a number
-    if( isNaN(parseInt(newInterval))){
-        var message = document.getElementById('message');
+    if (isNaN(parseInt(newInterval))) {
+        let message = document.getElementById('message');
         message.innerHTML = "Not a valid interval";
         message.classList = "show";
        setTimeout(()=>{
         message.classList = "hidden";
        }, "3000");
 
-    }else{
-        var message = document.getElementById('message');
+    } else {
+        let message = document.getElementById('message');
         message.innerHTML = "Interval Saved & Updated";
 
         // get active tabs
@@ -30,7 +30,7 @@ saveButton.addEventListener('click', async ()=>{
 
         chrome.storage.local.set({"interval": newInterval});
 
-        var message = document.getElementById('message');
+        let message = document.getElementById('message');
         message.classList = "show";
        setTimeout(()=>{
         message.classList = "hidden";
